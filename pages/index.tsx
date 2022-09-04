@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
 
 const Home: NextPage = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: any) => console.log(data);
   return (
     <div>
       <Head>
@@ -11,9 +15,25 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1 className="text-3xl">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <div className="flex justify-center bg-slate-100 overflow-auto">
+          <div className="w-[210mm] min-h-[297mm] shadow-md m-10  bg-white p-10">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* register your input into the hook by invoking the "register" function */}
+              <input
+                className="text-3xl font-semibold w-full focus:outline-none"
+                placeholder="Ваше ім'я"
+                defaultValue="Євгеній Гизила"
+                {...register("basics.name")}
+              />
+              <TextareaAutosize
+                className="w-full focus:outline-none mt-5 resize-none"
+                placeholder="Про себе"
+                defaultValue=""
+                {...register("basics.summary")}
+              />
+            </form>
+          </div>
+        </div>
       </main>
     </div>
   );
