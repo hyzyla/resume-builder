@@ -2,6 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
+import ExperienceRow from "../components/ExperienceRow";
+
+// Inspired by
+// https://registry.jsonresume.org/thomasdavis?theme=short
 
 const Home: NextPage = () => {
   const { register, handleSubmit } = useForm();
@@ -17,20 +21,30 @@ const Home: NextPage = () => {
       <main>
         <div className="flex justify-center bg-slate-100 overflow-auto">
           <div className="w-[210mm] min-h-[297mm] shadow-md m-10  bg-white p-10">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
               {/* register your input into the hook by invoking the "register" function */}
               <input
                 className="text-3xl font-semibold w-full focus:outline-none"
                 placeholder="Ваше ім'я"
-                defaultValue="Євгеній Гизила"
+                defaultValue="Thomas Davis"
                 {...register("basics.name")}
               />
               <TextareaAutosize
                 className="w-full focus:outline-none mt-5 resize-none"
                 placeholder="Про себе"
-                defaultValue=""
+                defaultValue="I’m a full stack web developer who can build apps from the ground up. I've worked mostly at startups so I am use to wearing many hats. I am a very product focussed developer who priotizes user feedback first and foremost. I'm generally very flexible when investigating new roles. "
                 {...register("basics.summary")}
               />
+              <h2 className="text-2xl font-bold">Skills</h2>
+              ...
+              <h2 className="text-2xl font-bold">Experience</h2>
+              <div className="space-y-5">
+                <ExperienceRow register={register} label="work.0" />
+                <ExperienceRow register={register} label="work.1" />
+                <ExperienceRow register={register} label="work.2" />
+              </div>
+              <h2 className="text-2xl font-bold">Education</h2>
+              ...
             </form>
           </div>
         </div>
