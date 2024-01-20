@@ -10,6 +10,11 @@ import ExperienceRow from "../components/ExperienceRow";
 const Home: NextPage = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => console.log(data);
+
+  const onDeleteExperienceRow = (idx: number) => {
+    console.log(idx);
+  };
+
   return (
     <div>
       <Head>
@@ -39,9 +44,21 @@ const Home: NextPage = () => {
               ...
               <h2 className="text-2xl font-bold">Experience</h2>
               <div className="space-y-5">
-                <ExperienceRow register={register} label="work.0" />
-                <ExperienceRow register={register} label="work.1" />
-                <ExperienceRow register={register} label="work.2" />
+                <ExperienceRow
+                  register={register}
+                  label="work.0"
+                  onDelete={() => onDeleteExperienceRow(0)}
+                />
+                <ExperienceRow
+                  register={register}
+                  label="work.1"
+                  onDelete={() => onDeleteExperienceRow(1)}
+                />
+                <ExperienceRow
+                  register={register}
+                  label="work.2"
+                  onDelete={() => onDeleteExperienceRow(2)}
+                />
               </div>
               <h2 className="text-2xl font-bold">Education</h2>
               ...
